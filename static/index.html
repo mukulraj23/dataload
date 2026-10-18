@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DataLoad · Ask your data</title>
+  <link rel="stylesheet" href="/static/app.css" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -8 116 116'><rect x='-8' y='-8' width='116' height='116' rx='24' fill='%230a0a0a'/><g fill='%23ededed'><circle cx='14' cy='14' r='3' opacity='.35'/><circle cx='14' cy='38' r='3' opacity='.35'/><circle cx='14' cy='62' r='3' opacity='.35'/><circle cx='14' cy='86' r='9'/><circle cx='38' cy='14' r='3' opacity='.35'/><circle cx='38' cy='38' r='3' opacity='.35'/><circle cx='38' cy='62' r='9'/><circle cx='38' cy='86' r='9'/><circle cx='62' cy='14' r='3' opacity='.35'/><circle cx='62' cy='38' r='9'/><circle cx='62' cy='62' r='9'/><circle cx='62' cy='86' r='9'/><circle cx='86' cy='14' r='9'/><circle cx='86' cy='38' r='9'/><circle cx='86' cy='62' r='9'/><circle cx='86' cy='86' r='9'/></g></svg>" />
+  <script src="/static/vendor/chart.umd.min.js" defer></script>
+</head>
+<body>
+  <div class="app">
+  <header class="topbar">
+    <a class="brand" href="/">
+      <div class="logo"><svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><circle cx="14" cy="14" r="3" opacity=".35"/><circle cx="14" cy="38" r="3" opacity=".35"/><circle cx="14" cy="62" r="3" opacity=".35"/><circle cx="14" cy="86" r="9"/><circle cx="38" cy="14" r="3" opacity=".35"/><circle cx="38" cy="38" r="3" opacity=".35"/><circle cx="38" cy="62" r="9"/><circle cx="38" cy="86" r="9"/><circle cx="62" cy="14" r="3" opacity=".35"/><circle cx="62" cy="38" r="9"/><circle cx="62" cy="62" r="9"/><circle cx="62" cy="86" r="9"/><circle cx="86" cy="14" r="9"/><circle cx="86" cy="38" r="9"/><circle cx="86" cy="62" r="9"/><circle cx="86" cy="86" r="9"/></svg></div>
+      <div>
+        <div class="brand-name">DataLoad</div>
+        <div class="brand-sub" data-i18n="tagline"></div>
+      </div>
+    </a>
+    <div class="top-actions">
+      <span class="model-pill" title="Open-weight model"><span class="dot"></span><span id="modelName">Gemma 4</span></span>
+      <button class="icon-btn" id="settingsBtn" title="API key">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.7 12.3 9.3-9.3M17 6l3 3M14 9l2 2"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="side-empty" id="sideEmpty">
+        <div class="side-title" data-i18n="how_title"></div>
+        <ol class="how">
+          <li><b>1</b><span data-i18n="how1"></span></li>
+          <li><b>2</b><span data-i18n="how2"></span></li>
+          <li><b>3</b><span data-i18n="how3"></span></li>
+        </ol>
+        <div class="trust" data-i18n="trust"></div>
+      </div>
+
+      <div class="side-data hidden" id="sideData">
+        <div class="ds-card">
+          <div class="ds-top">
+            <div class="ds-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 10h18M9 4v16"/></svg>
+            </div>
+            <div class="ds-meta">
+              <div class="ds-name" id="dsName"></div>
+              <div class="ds-dims" id="dsDims"></div>
+            </div>
+          </div>
+          <div class="sample-badge hidden" id="sampleBadge" data-i18n="sample_badge"></div>
+          <div class="ds-actions">
+            <button class="btn ghost sm" id="previewBtn" data-i18n="preview"></button>
+            <button class="btn ghost sm" id="changeBtn" data-i18n="change"></button>
+          </div>
+        </div>
+
+        <div class="side-section">
+          <div class="side-title" data-i18n="columns"></div>
+          <div class="chips" id="colChips"></div>
+        </div>
+
+        <div class="side-section">
+          <div class="side-title"><span data-i18n="health"></span> <span class="tiny" data-i18n="no_ai"></span></div>
+          <ul class="health" id="healthList"></ul>
+        </div>
+
+        <div class="side-section share hidden" id="shareBox">
+          <div class="side-title" data-i18n="share"></div>
+          <div class="share-btns">
+            <button class="btn sm" id="waBtn">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3.1.2.1.7-.1 1.3Z"/></svg>
+              WhatsApp
+            </button>
+            <button class="btn ghost sm" id="dlBtn" data-i18n="download"></button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <!-- Empty state -->
+      <section class="hero" id="hero">
+        <div class="hero-inner">
+          <div class="eyebrow" data-i18n="eyebrow"></div>
+          <h1 data-i18n="hero_title"></h1>
+          <p class="lead" data-i18n="hero_sub"></p>
+
+          <div class="options">
+            <label class="opt" id="dropZone">
+              <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" hidden />
+              <div class="opt-ico green">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>
+              </div>
+              <div class="opt-title" data-i18n="opt_file"></div>
+              <div class="opt-sub" data-i18n="opt_file_sub"></div>
+            </label>
+
+            <label class="opt">
+              <input type="file" id="photoInput" accept="image/*" hidden />
+              <div class="opt-ico amber">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="14" r="3.5"/></svg>
+              </div>
+              <div class="opt-title" data-i18n="opt_photo"></div>
+              <div class="opt-sub" data-i18n="opt_photo_sub"></div>
+              <span class="new-tag">Vision</span>
+            </label>
+
+            <button class="opt" id="sampleBtn" type="button">
+              <div class="opt-ico blue">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>
+              </div>
+              <div class="opt-title" data-i18n="opt_sample"></div>
+              <div class="opt-sub" data-i18n="opt_sample_sub"></div>
+            </button>
+          </div>
+
+          <div class="hero-steps">
+            <span><b>1</b><span data-i18n="s1"></span></span>
+            <span><b>2</b><span data-i18n="s2"></span></span>
+            <span><b>3</b><span data-i18n="s3"></span></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Chat -->
+      <section class="chat hidden" id="chat">
+        <div class="thread" id="thread"></div>
+        <div class="composer-wrap">
+          <div class="suggest" id="suggest"></div>
+          <form class="composer" id="composer">
+            <textarea id="qInput" rows="1" maxlength="500"></textarea>
+            <button class="send" id="sendBtn" type="submit" aria-label="Send">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+            </button>
+          </form>
+          <div class="foot-note" data-i18n="foot"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  </div>
+
+  <!-- Modals -->
+  <div class="modal hidden" id="keyModal">
+    <div class="modal-card narrow">
+      <h3 data-i18n="key_title"></h3>
+      <p class="muted" data-i18n="key_sub"></p>
+      <a class="key-link" href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" data-i18n="key_link"></a>
+      <input type="password" id="keyInput" placeholder="AIza..." autocomplete="off" />
+      <div class="modal-actions">
+        <button class="btn ghost" data-close data-i18n="cancel"></button>
+        <button class="btn primary" id="keySave" data-i18n="save"></button>
+      </div>
+      <div class="tiny muted" data-i18n="key_note"></div>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="photoModal">
+    <div class="modal-card wide">
+      <div class="modal-head">
+        <h3 data-i18n="photo_title"></h3>
+        <button class="icon-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      </div>
+      <div class="photo-grid">
+        <div class="photo-left"><img id="photoPreview" alt="" /></div>
+        <div class="photo-right">
+          <div class="photo-loading" id="photoLoading">
+            <div class="scan"></div>
+            <div><b data-i18n="reading_photo"></b><div class="muted tiny" id="photoTimer">0.0s</div></div>
+          </div>
+          <div id="photoResult" class="hidden">
+            <div class="note info" id="photoNote"></div>
+            <div class="table-scroll editable"><table id="photoTable"></table></div>
+            <div class="modal-actions">
+              <button class="btn ghost sm" id="addRow" data-i18n="add_row"></button>
+              <button class="btn primary" id="useTable" data-i18n="use_table"></button>
+            </div>
+          </div>
+          <div id="photoError" class="note warn hidden"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="demoModal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3 data-i18n="demos_title"></h3>
+        <button class="icon-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      </div>
+      <div class="demo-list" id="demoList"><div class="muted tiny">Loading…</div></div>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="previewModal">
+    <div class="modal-card wide">
+      <div class="modal-head">
+        <h3 id="previewTitle"></h3>
+        <button class="icon-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      </div>
+      <div class="table-scroll tall"><table id="previewTable"></table></div>
+    </div>
+  </div>
+
+  <div class="toast hidden" id="toast"></div>
+
+  <script src="/static/app.js" defer></script>
+</body>
+</html>

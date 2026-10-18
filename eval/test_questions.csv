@@ -1,0 +1,11 @@
+question,gold_plan
+Pichle mahine sabse zyada bijli kisne li?,"{""intent"": ""rank"", ""metric"": ""kwh"", ""agg"": ""sum"", ""group_by"": ""building"", ""filters"": [{""col"": ""month"", ""op"": ""=="", ""value"": ""2026-09""}], ""order"": ""desc""}"
+Which building used the least electricity in 2026-05?,"{""intent"": ""rank"", ""metric"": ""kwh"", ""agg"": ""sum"", ""group_by"": ""building"", ""filters"": [{""col"": ""month"", ""op"": ""=="", ""value"": ""2026-05""}], ""order"": ""asc""}"
+Bill ka trend kya hai?,"{""intent"": ""trend"", ""metric"": ""bill_rs"", ""agg"": ""sum""}"
+Total bill of Boys Hostel B?,"{""intent"": ""aggregate"", ""metric"": ""bill_rs"", ""agg"": ""sum"", ""filters"": [{""col"": ""building"", ""op"": ""=="", ""value"": ""Boys Hostel B""}]}"
+August vs September kitni bijli ka fark?,"{""intent"": ""compare"", ""metric"": ""kwh"", ""agg"": ""sum"", ""compare"": {""col"": ""month"", ""a"": ""2026-08"", ""b"": ""2026-09""}}"
+Per student sabse zyada bijli kaunsa hostel?,"{""intent"": ""ratio"", ""metric"": ""kwh"", ""denominator"": ""students"", ""group_by"": ""building"", ""agg"": ""sum""}"
+Library ka average monthly kwh?,"{""intent"": ""aggregate"", ""metric"": ""kwh"", ""agg"": ""mean"", ""filters"": [{""col"": ""building"", ""op"": ""=="", ""value"": ""Library""}]}"
+Kitne records mein kwh 15000 se zyada hai?,"{""intent"": ""count"", ""filters"": [{""col"": ""kwh"", ""op"": "">"", ""value"": 15000}]}"
+Har AC kitni bijli leta hai?,"{""intent"": ""unsupported""}"
+Solar panel se kitni bijli bani?,"{""intent"": ""unsupported""}"

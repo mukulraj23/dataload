@@ -1,0 +1,4 @@
+Bundled so the app works on slow or blocked networks:
+- Chart.js 4.4.4: MIT License (chartjs.org)
+- Geist and Geist Mono: SIL Open Font License 1.1 (vercel.com/font)
+- Noto Sans Devanagari: SIL Open Font License 1.1 (Google Fonts), used only to render Hindi text in data

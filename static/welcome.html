@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DataLoad · Ask your data a question</title>
+  <meta name="description" content="Upload a CSV, an Excel sheet or a photo of a paper register and ask questions in plain words. Gemma 4 plans the query, pandas does the maths, and every answer shows the code behind it." />
+  <meta name="theme-color" content="#0a0a0a" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -8 116 116'><rect x='-8' y='-8' width='116' height='116' rx='24' fill='%230a0a0a'/><g fill='%23ededed'><circle cx='14' cy='14' r='3' opacity='.35'/><circle cx='14' cy='38' r='3' opacity='.35'/><circle cx='14' cy='62' r='3' opacity='.35'/><circle cx='14' cy='86' r='9'/><circle cx='38' cy='14' r='3' opacity='.35'/><circle cx='38' cy='38' r='3' opacity='.35'/><circle cx='38' cy='62' r='9'/><circle cx='38' cy='86' r='9'/><circle cx='62' cy='14' r='3' opacity='.35'/><circle cx='62' cy='38' r='9'/><circle cx='62' cy='62' r='9'/><circle cx='62' cy='86' r='9'/><circle cx='86' cy='14' r='9'/><circle cx='86' cy='38' r='9'/><circle cx='86' cy='62' r='9'/><circle cx='86' cy='86' r='9'/></g></svg>" />
+  <link rel="preload" href="/static/vendor/Geist.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/static/welcome.css" />
+  <script src="/static/js/hero-bg.js" defer></script>
+  <script src="/static/js/section-bg.js" defer></script>
+  <script src="/static/welcome.js" defer></script>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+      <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="14" r="3.5"/></symbol>
+      <symbol id="i-school" viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></symbol>
+      <symbol id="i-sprout" viewBox="0 0 24 24"><path d="M12 21v-9"/><path d="M12 12c0-4 3-7 8-7 0 4-3 7-8 7z"/><path d="M12 14c0-3-2.5-5.5-7-5.5 0 3 2.5 5.5 7 5.5z"/></symbol>
+      <symbol id="i-store" viewBox="0 0 24 24"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9h18v2a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0z"/><path d="M5 13v7h14v-7"/></symbol>
+      <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol>
+      <symbol id="i-scan" viewBox="0 0 24 24"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3M7 12h10"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+      <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></symbol>
+      <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17h.01"/></symbol>
+      <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></symbol>
+      <symbol id="i-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></symbol>
+    </defs>
+  </svg>
+
+  <nav class="nav" id="nav">
+    <div class="wrap nav-in">
+      <a class="brand" href="/"><span class="mark"><svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><circle cx="14" cy="14" r="3" opacity=".35"/><circle cx="14" cy="38" r="3" opacity=".35"/><circle cx="14" cy="62" r="3" opacity=".35"/><circle cx="14" cy="86" r="9"/><circle cx="38" cy="14" r="3" opacity=".35"/><circle cx="38" cy="38" r="3" opacity=".35"/><circle cx="38" cy="62" r="9"/><circle cx="38" cy="86" r="9"/><circle cx="62" cy="14" r="3" opacity=".35"/><circle cx="62" cy="38" r="9"/><circle cx="62" cy="62" r="9"/><circle cx="62" cy="86" r="9"/><circle cx="86" cy="14" r="9"/><circle cx="86" cy="38" r="9"/><circle cx="86" cy="62" r="9"/><circle cx="86" cy="86" r="9"/></svg></span>DataLoad</a>
+      <div class="nav-links">
+        <a href="#who">Who it's for</a>
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#stack">Under the hood</a>
+      </div>
+      <a class="btn btn-light sm" href="/app">Open app</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="hero">
+    <div class="hero-bg" id="heroBg" aria-hidden="true"></div>
+    <div class="wrap hero-in">
+      <p class="label">Hacktoberfest HackDay 2026 &nbsp;/&nbsp; PS 03</p>
+      <h1>Your data<br />has answers.<br /><span class="shine">Just ask.</span></h1>
+      <p class="lead">Upload a spreadsheet or a photo of a paper register and ask a question in plain words. You get the number, a chart and the code that produced it.</p>
+      <div class="cta">
+        <a class="btn btn-light lg" href="/app">Get started <svg class="ic"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-dark lg" href="/app#demos">Try a demo dataset</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="marquee" aria-label="Example questions">
+    <div class="mq"><div class="mq-track"><span class="q">Which region has the highest average charges?</span><span class="q">Average charges for smokers vs non-smokers</span><span class="q">What % have heart disease, by sex?</span><span class="q">Which company has the highest average laptop price?</span><span class="q">How many Movies vs TV Shows?</span><span class="q">Top 10 countries by population</span><span class="q">Which region has the highest average charges?</span><span class="q">Average charges for smokers vs non-smokers</span><span class="q">What % have heart disease, by sex?</span><span class="q">Which company has the highest average laptop price?</span><span class="q">How many Movies vs TV Shows?</span><span class="q">Top 10 countries by population</span></div></div>
+    <div class="mq rev"><div class="mq-track"><span class="q">What is the trend of average price by year?</span><span class="q">Average cholesterol by chest pain type</span><span class="q">How many animals have feathers?</span><span class="q">Which rating has the most titles?</span><span class="q">Average literacy by region</span><span class="q">Tell me about this data</span><span class="q">What is the trend of average price by year?</span><span class="q">Average cholesterol by chest pain type</span><span class="q">How many animals have feathers?</span><span class="q">Which rating has the most titles?</span><span class="q">Average literacy by region</span><span class="q">Tell me about this data</span></div></div>
+  </section>
+
+  <section class="section" id="demo">
+    <div class="wrap">
+      <figure class="shot frame">
+        <div class="frame-bar"><i></i><i></i><i></i><span>localhost:8000/app</span></div>
+        <img src="/static/img/app-shot.png" alt="DataLoad answering a question about the insurance demo dataset, with a bar chart" loading="lazy" />
+      </figure>
+    </div>
+  </section>
+
+  <section class="section has-bg" id="who">
+    <div class="sec-bg" data-scene="matrix" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="head">
+        <p class="label">Who it's for</p>
+        <h2>Everyone has data.<br /><span>Almost nobody has an analyst.</span></h2>
+        <p>A lot of everyday records live in Excel sheets and paper registers. Getting answers out of them usually means formulas or pivot tables.</p>
+      </div>
+      <div class="personas">
+        <article class="persona">
+          <div class="p-top"><svg class="ic lg"><use href="#i-school"/></svg><span class="tag">Hostel warden</span></div>
+          <h3>Colleges and hostels</h3>
+          <p>Find which hostel is wasting power before the monthly meeting.</p>
+        </article>
+        <article class="persona">
+          <div class="p-top"><svg class="ic lg"><use href="#i-sprout"/></svg><span class="tag">Panchayat clerk</span></div>
+          <h3>Panchayats and NGOs</h3>
+          <p>Photograph a handwritten register. It becomes a table you can check and question.</p>
+        </article>
+        <article class="persona">
+          <div class="p-top"><svg class="ic lg"><use href="#i-store"/></svg><span class="tag">Shop owner</span></div>
+          <h3>Small shops</h3>
+          <p>Best sellers, slow months and pending dues. No spreadsheet skills needed.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how">
+    <div class="wrap">
+      <div class="head">
+        <p class="label">How it works</p>
+        <h2>The model reads the question.<br /><span>Code does the maths.</span></h2>
+        <p>Gemma 4 never sees your rows and never writes a number. It returns a small plan; pandas runs it on your data.</p>
+      </div>
+      <div class="flow" id="flow">
+        <ol class="flow-steps">
+          <li class="on" data-step="0"><span class="n">01</span><div><h3>Ask</h3><p>Type the question the way you would ask a person.</p></div><i class="bar"><b></b></i></li>
+          <li data-step="1"><span class="n">02</span><div><h3>Plan</h3><p>Gemma 4 sees only column names and returns a JSON plan.</p></div><i class="bar"><b></b></i></li>
+          <li data-step="2"><span class="n">03</span><div><h3>Compute</h3><p>pandas runs the plan and returns the answer, chart and code.</p></div><i class="bar"><b></b></i></li>
+        </ol>
+        <div class="term">
+          <div class="term-bar"><i></i><i></i><i></i><span id="termTitle">question</span></div>
+          <div class="term-body">
+            <div class="pane on" data-pane="0"><span class="prompt">&gt;</span> <span id="typed"></span><span class="caret"></span></div>
+            <pre class="pane" data-pane="1"><code><span class="t-p">{</span>
+  <span class="t-k">"intent"</span>: <span class="t-s">"rank"</span>,
+  <span class="t-k">"metric"</span>: <span class="t-s">"charges"</span>,
+  <span class="t-k">"agg"</span>: <span class="t-s">"mean"</span>,
+  <span class="t-k">"group_by"</span>: <span class="t-s">"region"</span>
+<span class="t-p">}</span></code></pre>
+            <div class="pane" data-pane="2">
+              <p class="res"><b>southeast</b> has the highest average charges: 14,735</p>
+              <div class="bars">
+                <div><span>southeast</span><i style="--w:100%"></i><em>14,735</em></div>
+                <div><span>northeast</span><i style="--w:91%"></i><em>13,406</em></div>
+                <div><span>northwest</span><i style="--w:84%"></i><em>12,418</em></div>
+                <div><span>southwest</span><i style="--w:84%"></i><em>12,347</em></div>
+              </div>
+              <p class="res-code">df.groupby("region").charges.mean().sort_values(ascending=False)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="features">
+    <div class="wrap">
+      <div class="head">
+        <p class="label">Features</p>
+        <h2>Answers you can check.</h2>
+        <p>Every number comes with the rows and the code behind it. Examples below come from the insurance and heart disease demo datasets.</p>
+      </div>
+      <div class="bento">
+        <div class="tile t-wide">
+          <div class="t-text"><svg class="ic"><use href="#i-scan"/></svg><h3>Register photo to table</h3><p>Turns a photo of a register into a table. Cells it can't read are marked so you can fix them first.</p></div>
+          <div class="reg">
+            <div class="reg-paper">
+              <div class="reg-row h"><span>Date</span><span>Floor</span><span>Units</span><span>Bill</span></div>
+              <div class="reg-row"><span>06/10</span><span>2nd</span><span>1240</span><span>10540</span></div>
+              <div class="reg-row"><span>07/10</span><span>Ground</span><span>405</span><span>3442</span></div>
+              <div class="reg-row"><span>08/10</span><span>1st</span><span>462</span><span>3927</span></div>
+              <div class="reg-row"><span>09/10</span><span>2nd</span><span>377</span><span class="unsure">32??</span></div>
+              <i class="scanline"></i>
+            </div>
+          </div>
+        </div>
+        <div class="tile">
+          <svg class="ic"><use href="#i-code"/></svg><h3>Proof with every answer</h3><p>The exact code and rows used, one click away.</p>
+          <pre class="snip"><code><span class="t-k">result</span> = df.groupby(<span class="t-s">"floor"</span>)
+         .units.sum()</code></pre>
+        </div>
+        <div class="tile">
+          <svg class="ic"><use href="#i-pulse"/></svg><h3>Data health check</h3><p>Flagged instantly, without AI.</p>
+          <ul class="flags"><li><i></i>'cholesterol' is 0 in 172 rows, probably missing</li><li><i></i>1 duplicate row in insurance data</li><li><i class="ok"></i>Zoo data looks clean</li></ul>
+        </div>
+        <div class="tile">
+          <svg class="ic"><use href="#i-help"/></svg><h3>An honest "I don't know"</h3><p>If the data can't answer, it says what's missing.</p>
+          <div class="bub"><span>What is each person&#39;s income?</span><em>This data has no income column, so it can&#39;t answer that.</em></div>
+        </div>
+        <div class="tile">
+          <svg class="ic"><use href="#i-share"/></svg><h3>Share as a report</h3><p>Download the answer as a text report or send it on WhatsApp.</p>
+          <div class="wa"><b>DataLoad report</b><span>Q: Smokers vs non-smokers, average charges?</span><span>A: 32,050 vs 8,434</span><small>Note: 1 duplicate row in the data</small></div>
+        </div>
+        <div class="tile t-full">
+          <div><svg class="ic"><use href="#i-file"/></svg><h3>Works with what you have</h3><p>Upload a spreadsheet, or take a photo of a printed or handwritten table.</p></div>
+          <div class="chips"><span>.csv</span><span>.xlsx</span><span>.xls</span><span>.jpg</span><span>.png</span><span>.webp</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="stack">
+    <div class="wrap open">
+      <div>
+        <p class="label">Under the hood</p>
+        <h2>Small model call.<br /><span>Plain pandas.</span></h2>
+        <p>DataLoad is built with Gemma 4, pandas and FastAPI. The model receives your question and the column names, not your rows. Register photos are the one exception: the photo is sent once so the model can read the table.</p>
+        <div class="clone">
+          <div class="clone-bar"><span>Run it locally</span><button class="copy" type="button" data-copy="cd dataload&#10;uv run --no-project --with-requirements requirements.txt python -m uvicorn server:app --port 8000"><svg class="ic"><use href="#i-copy"/></svg><span>Copy</span></button></div>
+<pre><code><span class="t-p">$</span> cd dataload
+<span class="t-p">$</span> uv run --no-project --with-requirements requirements.txt \
+    python -m uvicorn server:app --port 8000</code></pre>
+        </div>
+      </div>
+      <dl class="spec">
+        <div><dt>Model</dt><dd>Gemma 4 26B-A4B</dd></div>
+        <div><dt>Maths</dt><dd>pandas</dd></div>
+        <div><dt>Server</dt><dd>FastAPI</dd></div>
+        <div><dt>Charts</dt><dd>Chart.js, bundled</dd></div>
+        <div><dt>Sent to the model</dt><dd>Question and column names</dd></div>
+        <div><dt>API key</dt><dd>Your own Gemini key</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section has-bg" id="faq">
+    <div class="sec-bg" data-scene="scatter" aria-hidden="true"></div>
+    <div class="wrap faq-wrap">
+      <div class="head">
+        <p class="label">FAQ</p>
+        <h2>Questions,<br /><span>answered.</span></h2>
+      </div>
+      <div class="faq">
+        <details><summary>Does my data leave my computer?<svg class="ic"><use href="#i-plus"/></svg></summary><p>Only column names and your question go to the model. Rows are processed locally by pandas. Register photos are sent to Gemma 4 once to read the table.</p></details>
+        <details><summary>Can the AI get a number wrong?<svg class="ic"><use href="#i-plus"/></svg></summary><p>The model never computes numbers. It picks the operation; pandas does the arithmetic, and you can open the exact code behind every answer.</p></details>
+        <details><summary>Do I need an API key?<svg class="ic"><use href="#i-plus"/></svg></summary><p>Yes, a Gemini API key from Google AI Studio. Put it in a .env file or enter it once in the app.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot" id="foot">
+    <picture class="foot-img" aria-hidden="true">
+      <source srcset="/static/img/footer-streaks.webp" type="image/webp" />
+      <img src="/static/img/footer-streaks.jpg" alt="" loading="lazy" />
+    </picture>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="wrap foot-cta">
+      <h2>Bring a file.<br /><span>Ask the first question.</span></h2>
+      <div class="cta">
+        <a class="btn btn-light lg" href="/app">Open the app <svg class="ic"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-dark lg" href="/app#demos">Try a demo dataset</a>
+      </div>
+    </div>
+    <div class="wrap foot-bar">
+      <span class="brand sm"><span class="mark"><svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><circle cx="14" cy="14" r="3" opacity=".35"/><circle cx="14" cy="38" r="3" opacity=".35"/><circle cx="14" cy="62" r="3" opacity=".35"/><circle cx="14" cy="86" r="9"/><circle cx="38" cy="14" r="3" opacity=".35"/><circle cx="38" cy="38" r="3" opacity=".35"/><circle cx="38" cy="62" r="9"/><circle cx="38" cy="86" r="9"/><circle cx="62" cy="14" r="3" opacity=".35"/><circle cx="62" cy="38" r="9"/><circle cx="62" cy="62" r="9"/><circle cx="62" cy="86" r="9"/><circle cx="86" cy="14" r="9"/><circle cx="86" cy="38" r="9"/><circle cx="86" cy="62" r="9"/><circle cx="86" cy="86" r="9"/></svg></span>DataLoad</span>
+      <nav><a href="#how">How it works</a><a href="#features">Features</a><a href="#stack">Under the hood</a><a href="/app">App</a></nav>
+      <span>Hacktoberfest HackDay 2026 &middot; IIMT University, Meerut</span>
+    </div>
+  </footer>
+</body>
+</html>
