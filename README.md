@@ -87,3 +87,7 @@ Netflix titles and zoo animals. Open them from "Demo datasets" in the app. They 
 - Needs the Gemini API, so it doesn't work offline. The free tier has rate limits.
 - One table at a time, no joins.
 - Photo reading can get messy handwriting wrong, so check the table before asking questions.
+
+## License
+
+MIT, see `LICENSE`. Bundled third-party files keep their own licenses, listed in `static/vendor/LICENSES.txt`.
